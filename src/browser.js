@@ -326,10 +326,10 @@ class RawFileBrowser extends React.Component {
       actionTargets: shouldClearState ? [] : actionTargets,
       activeAction: shouldClearState ? null : prevState.activeAction,
     }), () => {
-      this.props.onSelect(selected)
+      this.props.onSelect(selected, key)
 
-      if (selectedType === 'file') this.props.onSelectFile(selected)
-      if (selectedType === 'folder') this.props.onSelectFolder(selected)
+      if (selectedType === 'file') this.props.onSelectFile(selected, key)
+      if (selectedType === 'folder') this.props.onSelectFolder(selected, key)
     })
   }
 
@@ -372,7 +372,7 @@ class RawFileBrowser extends React.Component {
       return stateChanges
     }, () => {
       const callback = isOpen ? 'onFolderClose' : 'onFolderOpen'
-      this.props[callback](this.getFile(folderKey))
+      this.props[callback](this.getFile(folderKey), folderKey)
     })
   }
 
@@ -383,7 +383,7 @@ class RawFileBrowser extends React.Component {
         [folderKey]: true,
       },
     }), () => {
-      this.props.onFolderOpen(this.getFile(folderKey))
+      this.props.onFolderOpen(this.getFile(folderKey), folderKey)
     })
   }
 
